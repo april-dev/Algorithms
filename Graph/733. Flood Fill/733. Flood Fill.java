@@ -8,6 +8,7 @@
         queue.offer(new int[]{sr,sc});
         
         int oldColor = image[sr][sc];
+//only the first item in the queue needs to be updated manually, all of the following items will be updated when they are added to the queue (line 20)
         image[sr][sc] = newColor;
         while (!queue.isEmpty()){
             int[] cur = queue.remove();
