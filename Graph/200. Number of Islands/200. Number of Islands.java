@@ -19,6 +19,8 @@ public int numIslands(char[][] grid) {
                     Q.offer(new int[]{i,j});
                     while (!Q.isEmpty()){
                         int[] cur = Q.remove();
+                 // could also add grid[cur[0]][cur[1]] = '0' here, but some items might be added the queue repeatedly. Optimal solution should update 
+                 // the grid for the first item (line 16), and then update the following items when they are added to the queue (line 28).
                         for (int[] dir:offset){
                             int x = cur[0]+dir[0];
                             int y = cur[1]+dir[1];
