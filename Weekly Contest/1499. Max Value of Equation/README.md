@@ -2,4 +2,3 @@ Since the target to be optimized is yi + yj + |xi - xj| (aka xj + yj + yi - xi g
 
 We could use a priority queue for this purpose. Since Python provides min-heap, we would stuff (xj - yj, xj) to the queue such that top of the queue has points with largest y-x and x could be used to verify if the constraint is met.
 
-time complexity O(nlogn)
