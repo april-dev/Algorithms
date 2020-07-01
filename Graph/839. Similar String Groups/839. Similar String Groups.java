@@ -36,7 +36,7 @@
     
     
     
-    //DFS
+    //DFS (faster)
     public int numSimilarGroups(String[] a) {
         int r = 0;
         for (int i = 0; i < a.length; i++)
@@ -60,5 +60,5 @@
         while (i < s.length() && diff <= 2)
             if (s.charAt(i) != t.charAt(i++))
                 diff++;
-        return diff == 2;
+        return diff == 2 || diff == 0;
     }
