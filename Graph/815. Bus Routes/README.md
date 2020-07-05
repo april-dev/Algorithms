@@ -1,0 +1,1 @@
+It shoudl be similar to that of a regular BFS. Basically, we are visiting each bus-route once and in doing so, we are also visiting each bus stop for a given route. So, it should be O(V+E), where V is the total number of bus routes and E is the total number of bus stops.
