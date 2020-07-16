@@ -97,7 +97,7 @@ public int findTheCity(int n, int[][] edges, int distanceThreshold) {
             int[] cur = pq.remove();
             int u = cur[0];
             int du = cur[1];
-            if (du > dist[u]) {continue;}
+            //if (du > dist[u]) {continue;}
             
             for (int[] nb : adj[u]) {
                 int v = nb[0];
