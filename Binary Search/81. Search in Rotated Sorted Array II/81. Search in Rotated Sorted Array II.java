@@ -1,3 +1,6 @@
+//Compare with Q33 (no duplicates)
+//consider case [1,1,1,1,2,1], nums[left] == nums[mid] == nums[right], therefore will pass the first for loop in Q33. 
+
 public boolean search(int[] nums, int target) {
     int start  = 0, end = nums.length - 1;
     
