@@ -33,6 +33,8 @@ public int kthSmallest(int[][] matrix, int k) {
 
 
 //Solution 2 Heap
+//heap solution is O( k log r ), 
+//where r is a number of rows. Heap doesn't have more than r elements inside, which means every poll/offer operations takes O(log r) time, which we repeat k times.
 public class Solution {
     public int kthSmallest(int[][] matrix, int k) {
         int n = matrix.length;
