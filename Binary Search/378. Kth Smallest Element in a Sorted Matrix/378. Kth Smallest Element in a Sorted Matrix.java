@@ -62,3 +62,21 @@ class Tuple implements Comparable<Tuple> {
         return this.val - that.val;
     }
 }
+
+
+public int kthSmallest(int[][] matrix, int k) {
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->(a[2]-b[2]));
+        int n = matrix.length;
+        for (int i=0; i<n; i++){
+            pq.add(new int[]{0, i, matrix[0][i]});            
+        }
+        for (int i=0; i<k-1; i++){
+            int[] cur = pq.poll();
+            int x = cur[0];
+            int y = cur[1];
+            int val = cur[2];
+            if (x+1<n) pq.add(new int[]{x+1, y, matrix[x+1][y]});
+        }
+        int[] res = pq.poll();
+        return res[2];
+    }
