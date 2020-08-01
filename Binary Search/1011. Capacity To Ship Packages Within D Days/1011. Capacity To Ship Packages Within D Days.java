@@ -19,6 +19,17 @@ public int shipWithinDays(int[] weights, int D) {
                 sum+=w;
             }
             */
+                
+            /*
+            for (int w:weights){
+                sum+=w;
+                if (sum>mid){
+                    count+=1;
+                    sum=w;
+                }
+               
+            }
+            */
             for (int w:weights){
                 if (sum+w>mid){
                     count+=1;
