@@ -1,3 +1,5 @@
+//Solution 1 is not efficient since it copy the value. assigning node is a better approach. Solution 2 increase tree height. Solution 3 and 4 is more height balanced.
+
 class Solution {
     public TreeNode deleteNode(TreeNode root, int key) {
         if (root==null) return null;
