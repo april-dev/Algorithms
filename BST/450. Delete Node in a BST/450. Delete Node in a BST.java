@@ -44,8 +44,35 @@ public TreeNode deleteNode(TreeNode root, int key) {
         }
         return root;
     }
+
+//Solution 3
+public TreeNode deleteNode(TreeNode root, int key) {
+        if(root == null) return root;
+        if(root.val < key) root.right = deleteNode(root.right, key);
+        else if(root.val > key) root.left = deleteNode(root.left, key);
+        else{
+            if(root.left == null) return root.right;
+            else if(root.right == null) return root.left;
+            else{
+                TreeNode newRoot = root.right, par = null;
+                while(newRoot.left != null){
+                    par = newRoot;
+                    newRoot = newRoot.left;
+                }
+                if(par == null){
+                    newRoot.left = root.left;
+                    return newRoot;
+                }
+                par.left = newRoot.right;
+                newRoot.left = root.left;
+                newRoot.right = root.right;
+                return newRoot;
+            }
+        }
+        return root;
+    }
     
-    //Solution 3
+    //Solution 4
     /*
     As for the case when both children of the node to be deleted are not null, I transplant the successor to replace the node to be deleted, 
     which is a bit harder to implement than just transplant the left subtree of the node to the left child of its successor. 
