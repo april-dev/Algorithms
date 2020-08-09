@@ -1,3 +1,9 @@
+/*
+The hashmap is to record presum and frequency of the presum. The reason why result += map.get(sum-k) is when at each sum if there is a presum exists 
+then there is a subarray between this sum and presum. But to use its frequency instead of just add 1 to result is because there can be multiple presum 
+exists at this point of sum. Since each presum is added up from beginning there can be no two duplicate presum and therefore no two duplicate subarrays exist.
+*/
+
 public int subarraySum(int[] nums, int k) {
         HashMap<Integer, Integer> map = new HashMap<>();
         int prefixSum = 0;
