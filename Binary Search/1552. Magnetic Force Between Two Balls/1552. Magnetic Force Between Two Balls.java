@@ -3,6 +3,8 @@
         int n = position.length;
         int left=0, right = position[n-1]-position[0];
         while(left<right){
+         //As a rule of thumb, use m = l + (r-l)//2 with l = m + 1 and r = m, 
+         //and use m = r - (r-l)//2 with l = m and r = m - 1. This can prevent m from stucking at r (or l) after the updating step.
             int mid = left + (right-left+1)/2;
             int start = position[0];
             int count = 1;
