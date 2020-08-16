@@ -1,4 +1,8 @@
- public int maxDistance(int[] position, int m) {
+ 
+//Time complexity: O(Nlog(10^9)) or O(NlogM), where M = max(position) - min(position)
+
+
+public int maxDistance(int[] position, int m) {
         Arrays.sort(position);
         int n = position.length;
         int left=0, right = position[n-1]-position[0];
