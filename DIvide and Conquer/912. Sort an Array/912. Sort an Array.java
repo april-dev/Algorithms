@@ -124,3 +124,67 @@ public int[] sortArray(int[] nums) {
             nums[p] = temp[q];
         }
     }
+
+//merge sort bottom up
+public int[] sortArray(int[] nums) {     
+        for (int size=1; size<nums.length; size *= 2){
+            for (int i=0; i<nums.length-size; i+=2*size){
+                int mid = i+size-1;
+                int end = Math.min(i+2*size-1, nums.length-1);
+                sort(nums, i, mid, end );
+            }
+        }      
+        return nums;
+    }  
+    public void sort(int[] nums, int l, int m, int r){
+        int[] temp = new int[r-l+1];
+        int i=l, j=m+1;
+        int k=0;
+        while (i<=m && j<=r){
+            if (nums[i]<nums[j]){
+                temp[k] = nums[i];
+                k++;
+                i++;
+            }else{
+                temp[k] = nums[j];
+                k++;
+                j++;
+            }
+        }
+        while (i<=m){
+            temp[k] = nums[i];
+                k++;
+                i++;
+        }
+        while (j<=r){
+            temp[k] = nums[j];
+                k++;
+                j++;
+        }
+        for (int p=l, q=0; p<=r; p++, q++){
+            nums[p] = temp[q];
+        }
+    }
+
+//QuickSort
+public int[] sortArray(int[] nums) {     
+        quicksort(nums, 0, nums.length-1);  
+        return nums;
+    }  
+    public void quicksort(int[] nums, int l, int r){
+        if (l>=r) return;
+        int mid = partition(nums, l, r);
+        quicksort(nums, l, mid);
+        quicksort(nums, mid+1, r);
+    }
+    public int partition (int[] nums, int l, int r){
+        int pivot = nums[l];
+        while (l<r){
+            while(l<r && nums[r]>=pivot) r--;
+            nums[l] = nums[r];
+            while(l<r && nums[l]<=pivot) l++;
+            nums[r] = nums[l];
+        }
+        nums[l]= pivot;
+        return l;      
+    }
