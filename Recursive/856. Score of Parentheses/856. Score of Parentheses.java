@@ -12,3 +12,24 @@ public int scoreOfParentheses(String S) {
         return cur;
          
      }
+
+//
+class Solution {
+    int i=0;
+    public int scoreOfParentheses(String S) {
+       int ans = 0;
+        while (i<S.length()){
+            char c = S.charAt(i++);
+            if (c=='('){
+                if (S.charAt(i)==')'){
+                    ans += 1;
+                    i++;
+                }else{
+                    ans += 2* scoreOfParentheses(S);
+                }
+            }else return ans;
+        }
+        return ans;
+    }
+}
+ 
