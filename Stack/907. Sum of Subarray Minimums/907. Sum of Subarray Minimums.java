@@ -1,3 +1,5 @@
+// can also use count of greater elements. See notes.
+
 public int sumSubarrayMins(int[] A) {
         Stack<Integer> previous = new Stack<>();
         Stack<Integer> next = new Stack<>();
