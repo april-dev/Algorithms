@@ -44,3 +44,26 @@ class MapSum {
         }
     }
 }
+//Solution 2: use two hash tables.
+class MapSum {
+public:
+    /** Initialize your data structure here. */
+    MapSum() {}
+    
+    void insert(const string& key, int val) {
+        int inc = val;
+        if (vals_.count(key)) {
+            inc -= vals_[key];
+        }
+        vals_[key] = val;
+        for (int i = 1; i <= key.length(); ++i)
+            sums_[key.substr(0,i)] += inc;
+    }
+    
+    int sum(const string& prefix) {
+        return sums_[prefix];
+    }
+private:
+    unordered_map<string, int> vals_;
+    unordered_map<string, int> sums_;    
+};
