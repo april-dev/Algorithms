@@ -1,4 +1,4 @@
-///Therefore time complexity is O(NL^2)
+//Time complexity: O(NL^2 + QL)  where N is the number of words, L is the max length of the word, Q is the number of queries.
 class WordFilter {
     TrieNode root;
     public WordFilter(String[] words) {
