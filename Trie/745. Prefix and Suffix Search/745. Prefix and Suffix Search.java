@@ -1,3 +1,4 @@
+///Therefore time complexity is O(NL^2)
 class WordFilter {
     TrieNode root;
     public WordFilter(String[] words) {
