@@ -1,3 +1,5 @@
+//dp[x] = dp[x-d] + 1, if (x -d) exists
+
 public int longestSubsequence(int[] arr, int difference) {
 		HashMap<Integer, Integer> dp = new HashMap<>();
 		int longest = 0;
