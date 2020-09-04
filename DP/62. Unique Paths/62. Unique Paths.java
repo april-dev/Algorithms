@@ -1,3 +1,6 @@
+//reduce memory to O(n)
+//https://leetcode.com/problems/unique-paths/discuss/22954/C%2B%2B-DP
+
 public int uniquePaths(int m, int n) {
         int[][] dp = new int[n][m];
         //dp[0][0] =1;
