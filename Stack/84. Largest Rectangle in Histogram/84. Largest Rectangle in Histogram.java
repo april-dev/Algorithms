@@ -1,3 +1,5 @@
+//Also see 85. Maximal Rectangle
+
 public int largestRectangleArea(int[] heights) {
         Stack<Integer> stack = new Stack<>();
         int n = heights.length;
