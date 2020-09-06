@@ -10,3 +10,19 @@ public int maxProfit(int[] prices) {
     
     return T_ik0;
     }
+/*
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/discuss/75931/Easiest-JAVA-solution-with-explanations
+    buy[i] = Math.max(buy[i - 1], sell[i - 2] - prices[i]);   
+    sell[i] = Math.max(sell[i - 1], buy[i - 1] + prices[i]);
+    
+    */
+    public int maxProfit(int[] prices) {
+      int prevbuy = Integer.MIN_VALUE, buy = Integer.MIN_VALUE, sell = 0, prevsell=0;
+        for (int price:prices){
+            prevbuy = buy;
+            buy = Math.max(prevbuy, prevsell-price);
+            prevsell = sell;
+            sell = Math.max(prevsell, prevbuy+price);
+        }
+        return sell;
+    }
