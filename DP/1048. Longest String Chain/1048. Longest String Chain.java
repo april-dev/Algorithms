@@ -1,3 +1,4 @@
+//O(NlogN + NL^2)
 public int longestStrChain(String[] words) {
         
         HashMap<String, Integer> dp = new HashMap<>();
@@ -18,6 +19,7 @@ public int longestStrChain(String[] words) {
 
 
 //recursive + memo
+//O(N + NL^2), dont need to sort 
 class Solution {
     public int longestStrChain(String[] words) {
         int ans = 0;
