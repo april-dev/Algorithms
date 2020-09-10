@@ -34,3 +34,26 @@ public int lengthOfLIS(int[] nums) {
     }
     return size;
 }
+
+
+ //recursive
+    public int lengthOfLIS(int[] nums) {
+        if (nums.length==0) return 0;
+        int[] dp = new int[nums.length];
+        int ans = 0;
+        for (int i=0; i<nums.length; i++){
+            ans = Math.max( ans, helper(nums, i, dp));
+        }
+        return ans;
+    }
+    
+    public int helper(int[] nums, int i, int[] dp){
+        if (i==0) return 1;
+        if (dp[i]>0) return dp[i];
+        int ans = 1;
+        for (int j=0; j<i; j++){
+            if (nums[j]<nums[i]) ans = Math.max(ans, helper(nums, j, dp)+1);
+        }
+        dp[i] = ans;
+        return ans;
+    }
