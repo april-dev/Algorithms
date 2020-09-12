@@ -1,3 +1,6 @@
+
+//Time complexity: O(2^n)
+//Space complexity: O(2^n)
 public List<Integer> grayCode(int n) {
         List<Integer> res = new ArrayList<>();
         res.add(0);
