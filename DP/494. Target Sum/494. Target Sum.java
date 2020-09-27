@@ -13,3 +13,15 @@ public int findTargetSumWays(int[] nums, int S) {
         }
         return dp[nums.length][sum+S];
     }
+
+
+//O(2^N)
+class Solution {
+    public int findTargetSumWays(int[] nums, int S) {
+        return helper(nums, S, 0, 0);
+    }
+    public int helper(int[]nums, int S, int sum, int idx){
+        if (idx == nums.length) return sum==S? 1:0;
+         return helper(nums, S, sum-nums[idx], idx+1) + helper(nums, S, sum+nums[idx], idx+1);      
+    }
+}
