@@ -7,6 +7,8 @@
 
 dp[x] = 1 means the sum x is possible.
 
+Refer to Q494. Target Sum
+
 */
  
  
