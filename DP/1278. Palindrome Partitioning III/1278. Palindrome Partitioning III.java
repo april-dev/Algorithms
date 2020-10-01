@@ -24,3 +24,28 @@ class Solution {
         return c;
     }
 }
+
+class Solution {
+    public int palindromePartition(String s, int k) {
+        int n = s.length();
+        int[][] dp = new int[k+1][n+1];
+        for (int i = 0; i < dp.length; i++) Arrays.fill(dp[i], Integer.MAX_VALUE);
+        return helper(s, k, dp, n);
+        
+    }
+    public int helper(String s, int k, int[][] dp, int n){
+        if (dp[k][n]!=Integer.MAX_VALUE) return dp[k][n];
+        if (k==1) return minChange(s, 0, n-1);
+        for (int i=k-1; i<n; i++){
+            dp[k][n] = Math.min(dp[k][n], helper(s, k-1, dp, i) + minChange(s, i, n-1));
+        }
+        return dp[k][n];
+    }
+     public int minChange(String s, int i, int j){
+        int c = 0;
+        while (i < j){
+            if (s.charAt(i++)!=s.charAt(j--)) c++;            
+        }
+        return c;
+    }
+}
