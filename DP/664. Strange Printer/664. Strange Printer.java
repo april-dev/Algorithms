@@ -31,7 +31,7 @@ class Solution {
         return helper(s, 0, n-1, dp);
     }
     public int helper(String s, int i, int j, int[][] dp){
-        if (i>j) return 0;
+        if (i>j) return 0;//this line is unnecessary
         if (dp[i][j]>0) return dp[i][j];
         
         int res = s.length()+1;
