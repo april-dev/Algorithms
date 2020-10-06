@@ -1,3 +1,4 @@
+//DP
 public int minScoreTriangulation(int[] A) {
         int n = A.length;
         int[][] dp = new int[n][n];
@@ -11,4 +12,21 @@ public int minScoreTriangulation(int[] A) {
             }
         }
         return dp[0][n-1];
+    }
+
+
+//recursive + memo
+public int minScoreTriangulation(int[] A) {
+        int n = A.length;
+        int[][] dp = new int[n][n];
+        return helper(A, 0, n-1, dp);
+    }
+    public int helper(int[] A, int i, int j, int[][] dp){
+        if (dp[i][j]!=0) return dp[i][j];
+        int res = 0;
+        for (int k = i+1; k<j; k++){
+            res = Math.min(res == 0 ? Integer.MAX_VALUE : res, helper(A, i, k, dp) + helper(A, k, j, dp) + A[i]*A[j]*A[k]);
+        }
+        dp[i][j] = res;
+        return res;
     }
