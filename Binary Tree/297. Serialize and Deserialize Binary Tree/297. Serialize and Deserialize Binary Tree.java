@@ -1,3 +1,6 @@
+//This code can also used to solve Q449. Serialize and Deserialize BST.
+//But a better way to solve Q449 is to use its BST properties.
+
 public class Codec {
     private static final String spliter = ",";
     private static final String NN = "X";
