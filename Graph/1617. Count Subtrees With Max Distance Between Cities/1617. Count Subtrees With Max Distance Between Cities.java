@@ -1,5 +1,11 @@
 //BitMask + BFS
 //Time: O(2^n * n^2), Space: O(n^2)
+
+/*
+Use bit-masking to generate all possible subgraphs
+For each subgraph, bfs to check if it is connected (and therefore a subtree);
+For each subtree, do a bfs again to compute its diameter.
+*/
 class Solution {
     public int[] countSubgraphsForEachDiameter(int n, int[][] edges) {
         int[] ans = new int[n-1];
@@ -70,6 +76,73 @@ class Solution {
 //For any given node a of the tree, a farthest node b from a must be one of the end points of a path with maximal length. 
 //i.e. there exists a path from b to c whose length is maximal.
 
+class Solution {
+    public int[] countSubgraphsForEachDiameter(int n, int[][] edges) {
+        int[] ans = new int[n-1];
+        for (int i=1; i<Math.pow(2, n); i++){
+            int d = maxDistance(i, n, edges);
+            if (d>0) ans[d-1]++;
+        }
+        return ans;
+    }
+    public int maxDistance(int state, int n, int[][] edges){
+        Set<Integer> cities = new HashSet<>();
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for (int i=0; i<n; i++){
+            if (((state>>i)& 1 )== 1) cities.add(i);
+        }
+        int rand = 0;
+        for (int[] edge:edges){
+            int u = edge[0]-1;
+            int v = edge[1]-1;
+            if (cities.contains(u) && cities.contains(v)){
+                map.putIfAbsent(u, new ArrayList<>());
+                map.putIfAbsent(v, new ArrayList<>());
+                map.get(u).add(v);
+                map.get(v).add(u);
+                rand = u;
+            }
+        }
+        
+            int[] res1 = bfs(map, rand);
+            if (res1[1]<cities.size()) return 0;
+            int[] res2 = bfs(map, res1[2]);
+           
+        return res2[0];
+    }
+    public int[] bfs(Map<Integer, List<Integer>> map, int src){
+        int[] ans = new int[3];
+        
+        Set<Integer> visited = new HashSet<>();
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[]{src, 0});
+        visited.add(src);
+        
+        int maxDist = -1, last = -1;
+        
+        while (!q.isEmpty()){
+            int size = q.size();
+            for (int i=0; i<size; i++){
+                int[] cur = q.remove();
+                last = cur[0];
+                maxDist = Math.max(maxDist, cur[1]);
+                
+                List<Integer> nei = map.get(cur[0]);
+                if (nei!=null){
+                for (int j=0; j<nei.size(); j++){
+                    if (visited.contains(nei.get(j))) continue;
+                    q.add(new int[]{nei.get(j), cur[1]+1});
+                    visited.add(nei.get(j));
+                } 
+                }
+            }
+        }
+        ans[0] = maxDist;
+        ans[1] = visited.size();
+        ans[2] = last;
+        return ans;
+    }
+}
 
 
 
