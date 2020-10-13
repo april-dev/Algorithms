@@ -23,8 +23,7 @@ public List<Integer> inorderTraversal(TreeNode root) {
                 stack.add(cur);
                 cur = cur.left;
             }
-            cur = stack.peek();
-            stack.pop();
+            cur = stack.pop();
             res.add(cur.val);
             cur = cur.right;           
         }
