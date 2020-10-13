@@ -1,3 +1,5 @@
+//Use dp[i][j][k] to denote the maximum points possible by removing the boxes of subarray boxes[i, j] with k boxes attached to its right of the same color as boxes[j].
+
 class Solution {
     public int removeBoxes(int[] boxes) {
         int n = boxes.length;
