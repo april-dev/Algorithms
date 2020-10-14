@@ -10,3 +10,17 @@ class Solution {
         res.add(root.val);
     }
 }
+
+public List<Integer> postorder(Node root) {
+        LinkedList<Integer> res = new LinkedList<>();
+        if (root==null) return res;
+        Stack<Node> stack = new Stack<>();
+        stack.add(root);
+        while (!stack.isEmpty()){
+            Node cur = stack.pop();
+            res.addFirst(cur.val);
+            for (Node child:cur.children) stack.add(child);
+        }
+        
+        return res;
+    }
