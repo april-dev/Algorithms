@@ -84,3 +84,37 @@ class Solution {
         return s*s == sum;
     }
 }
+
+//DP: Hamiltoninan Path
+public int numSquarefulPerms(int[] A) {
+       int n = A.length;
+       int[][] dp = new int[1<<n][n];
+       int[][] graph = new int[n][n];
+       Arrays.sort(A);
+       for (int i=0; i<n; i++){
+           for (int j=0; j<n; j++){
+               if (i==j) continue;
+               int r = (int) Math.sqrt(A[i] + A[j]);
+               if (r * r == A[i] + A[j]) graph[i][j] = 1;
+           }
+       }
+       for (int i=0; i<n; i++){
+           if (i==0 || A[i]!=A[i-1]) dp[(1<<i)][i] = 1;
+       }
+       for (int s=0; s<(1<<n); s++){
+           for (int i=0; i<n; i++){
+               if (dp[s][i]==0) continue;
+               for (int j=0; j<n; j++){
+                   if (graph[i][j]==0) continue;
+                   if ((s & (1<<j))!=0) continue;//initially stuck at ((s & (1<<j))==1) (wrong)
+                   if (j>0 && (s & (1<<(j - 1)))==0 && A[j] == A[j-1]) continue;
+                       dp[s | (1<<j)][j] += dp[s][i];
+               }
+           }
+       }
+        int res = 0;
+        for (int i=0; i<n; i++){
+            res += dp[(1<<n) - 1][i];
+        }
+        return res;
+    }
