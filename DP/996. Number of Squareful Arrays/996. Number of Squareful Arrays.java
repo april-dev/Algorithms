@@ -101,7 +101,7 @@ public int numSquarefulPerms(int[] A) {
        for (int i=0; i<n; i++){
            if (i==0 || A[i]!=A[i-1]) dp[(1<<i)][i] = 1;
        }
-       for (int s=0; s<(1<<n); s++){
+       for (int s=0; s<(1<<n); s++){//for (int s=0; s<(1<<n)-1; s++){ also works, (1<<n)-1 is redundant because all of the digits have been visited, will be caught at line 109
            for (int i=0; i<n; i++){
                if (dp[s][i]==0) continue;
                for (int j=0; j<n; j++){
