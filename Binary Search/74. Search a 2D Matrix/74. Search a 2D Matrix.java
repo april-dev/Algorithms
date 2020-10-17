@@ -20,7 +20,9 @@ public boolean searchMatrix(int[][] matrix, int target) {
                 right = mid-1;
             }
         }
+        //rowIndex = left==0? 0:(left-1); also works
         rowIndex = right < 0 ? 0 : right;
+        
         left = 0;
         right = n-1;
         while (left<=right){
