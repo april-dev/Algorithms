@@ -81,6 +81,8 @@ public int[] smallestSufficientTeam(String[] req_skills, List<List<String>> peop
     }
 
 //Using HashSet
+//Time O(people * 2^skill)
+//Space O(2^skill)
 public int[] smallestSufficientTeam(String[] req_skills, List<List<String>> people) {
         int sLen = req_skills.length;
         int pLen = people.size();
