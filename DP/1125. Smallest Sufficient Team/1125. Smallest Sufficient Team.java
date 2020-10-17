@@ -79,3 +79,37 @@ public int[] smallestSufficientTeam(String[] req_skills, List<List<String>> peop
         }
         return res;
     }
+
+//Using HashSet
+public int[] smallestSufficientTeam(String[] req_skills, List<List<String>> people) {
+        int sLen = req_skills.length;
+        int pLen = people.size();
+            
+        Map<String, Integer> map = new HashMap<>();
+        for (int i=0; i<sLen; i++) map.put(req_skills[i], i);
+        
+        Set<Integer>[] skillArr = new Set[1<<sLen];
+        skillArr[0] = new HashSet<>();
+
+        for (int i=0; i<pLen; i++){
+            int k = 0;
+            for (String s:people.get(i)) k |= (1<<map.get(s));
+            for (int j=0; j<skillArr.length; j++){
+                if (skillArr[j]==null) continue;
+                Set<Integer> curSkill = skillArr[j];
+                int combined = j | k;
+                if (combined == j) continue;
+                if (skillArr[combined]==null || skillArr[combined].size()> curSkill.size()+1){
+                    Set<Integer> addedSkill = new HashSet<>(curSkill);
+                    addedSkill.add(i);
+                    skillArr[combined] = addedSkill;
+                }
+            }
+        }
+        
+        int target = (1<<sLen) - 1;  
+        int[] res = new int[skillArr[target].size()];
+        int pos = 0;
+        for (Integer n:skillArr[target]) res[pos++] = n;
+        return res;
+    }
