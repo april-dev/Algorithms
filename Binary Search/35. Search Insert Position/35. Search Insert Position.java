@@ -41,3 +41,19 @@ int l=0, r = nums.length;
             }
         }
         return l;
+
+//if the question changes to find the index of the element that is greater than target, refer to Q1187. Make Array Strictly Increasing in DP
+ public int binarySearch(int target, int[] arr){
+        // right = arr.length - 1 is not correct, the target is equal to the last element, then left = mid + 1 = right (arr.length)
+        int left = 0, right = arr.length;
+        while (left < right){
+            int mid = left + (right - left)/2;
+            //search for the next greater element than target
+            if (arr[mid]<=target){
+                left = mid + 1;
+            }else{
+                right = mid;
+            }
+        }
+        return left;
+    }
