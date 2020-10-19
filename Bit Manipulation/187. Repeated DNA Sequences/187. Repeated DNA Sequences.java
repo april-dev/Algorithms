@@ -24,7 +24,7 @@ public List<String> findRepeatedDnaSequences(String s) {
         for (int i=0; i<s.length(); i++){
             val = (val<<2);
             val |= map[s.charAt(i) - 'A'];
-            val &= 0xfffff;   //0xfffff is 20 1, aka Window of 10 2bits, the bits exceed 20 bits will be 0.
+            val &= 0xfffff;   //0xfffff is 20 '1's, aka Window of 10 2bits, the bits exceed 20 bits will be 0.
             if (i<9) continue;
             if (!word.add(val) && secondWord.add(val)) res.add(s.substring(i-9, i+1));
         }
