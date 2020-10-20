@@ -44,3 +44,34 @@ class Solution {
     }
     
 }
+
+//Used the same method to solve Q1007. Minimum Domino Rotations For Equal Row
+//But 1007 is not DP problem. Simple array.
+public int minDominoRotations(int[] A, int[] B) {
+        int res1 = helper(A, B);
+        int res2 = helper(B, A);
+        if (res1!=-1 && res2!=-1) return Math.min(res1, res2);
+        else if (res1!=-1) return res1;
+        else if (res2!=-1) return res2;
+        else return -1;
+    }
+    public int helper(int[] A, int[] B){
+        Map<Integer, Integer> dp = new HashMap<>();
+        dp.put(A[0], 0);
+        if (A[0]!=B[0]) dp.put(B[0], 1);
+        for (int i=1; i<A.length; i++){
+            Map<Integer, Integer> temp = new HashMap<>();
+            for (Map.Entry<Integer, Integer> entry: dp.entrySet()){
+                int key = entry.getKey();
+                int val = entry.getValue();
+                int lastCount = temp.containsKey(key)? temp.get(key): Integer.MAX_VALUE;
+                if (A[i]==key) temp.put(key, Math.min(lastCount, val));
+                else if (B[i]==key) temp.put(key, Math.min(lastCount, val+1));
+            }
+            dp = temp;
+        }
+        if (dp.size()==0) return -1;
+        int res = Integer.MAX_VALUE;
+        for (int key: dp.keySet()) res = Math.min(res, dp.get(key));
+        return res;
+    }
