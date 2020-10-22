@@ -25,3 +25,63 @@ class Solution {
     }
 }
 
+
+
+//BFS
+class Solution {
+    int min =0, max=0;
+    public class Pair {
+        int x;
+        int y;
+        TreeNode n;
+        
+        Pair(TreeNode n, int x, int y){
+            this.n = n;
+            this.x = x;
+            this.y = y;
+        }
+    }
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        Queue<Pair> Q = new LinkedList<>();
+        HashMap<Integer, List<Pair>> map = new HashMap<>();
+        List<List<Integer>> res = new ArrayList<>();
+             
+        Q.add(new Pair(root,0,0));
+        int min=0, max = 0;
+        while (!Q.isEmpty()){
+            Pair cur = Q.remove();
+            
+            min = Math.min(min, cur.x);
+            max = Math.max(max, cur.x);
+                        
+            if (!map.containsKey(cur.x))
+                map.put(cur.x, new ArrayList<Pair>());
+            
+            map.get(cur.x).add(cur);
+            
+            if (cur.n.left != null) Q.add(new Pair(cur.n.left,cur.x-1, cur.y-1 ));
+            if (cur.n.right != null) Q.add(new Pair(cur.n.right,cur.x+1, cur.y-1 )); 
+        }
+        
+        for (int i=min; i<=max; i++){
+            List<Pair> list = map.get(i);
+             
+            Collections.sort(list, new Comparator<Pair>(){
+                @Override
+                public int compare(Pair a, Pair b){
+                    if (a.y == b.y) {
+                        return a.n.val - b.n.val;
+                    }
+                    return 0;
+                }
+            });
+            
+            List<Integer> temp = new ArrayList<>();
+            for (int j=0; j<list.size(); j++){
+                temp.add(list.get(j).n.val);
+            }
+            res.add(temp);      
+        }
+        return res;
+    }  
+}            
