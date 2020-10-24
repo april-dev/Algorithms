@@ -45,6 +45,34 @@ public TreeNode trimBST(TreeNode root, int low, int high) {
         
         return root;
   }
+
+//Iterative
+public TreeNode trimBST(TreeNode root, int low, int high) {
+        if (root==null) return null; 
+        //Find a valid root which is used to return.
+        while (root.val<low || root.val>high){
+            if (root.val<low) root = root.right;
+            if (root.val>high) root = root.left;
+        }
+        TreeNode dummy = root;
+        // Remove the invalid nodes from left subtree.
+        while (dummy != null){
+            while (dummy.left != null && dummy.left.val<low){
+                dummy.left = dummy.left.right;
+            }
+            dummy = dummy.left;//dummy.right does not need to be checked because these nodes are on the left side of root, so their upper value is bounded by root.val 
+                               //root.val is guaranteed to be valid from the previous step
+        }
+        dummy = root;
+       // Remove the invalid nodes from right subtree
+         while (dummy != null){
+            while (dummy.right != null && dummy.right.val>high){
+                dummy.right = dummy.right.left;
+            }
+            dummy = dummy.right;
+        }
+        return root;
+    }
   
   
   
