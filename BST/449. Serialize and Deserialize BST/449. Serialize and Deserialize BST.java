@@ -1,7 +1,7 @@
 //similar template as Q297. Serialize and Deserialize Binary Tree
 //Difference:
 //BST: use upper and lower boundaries to check whether we should add null
-//Binary Tree: use upper and lower boundaries to check whether we should add null
+//Binary Tree: use encoded string "X" to check whether we should add null
 
 public class Codec {
 
