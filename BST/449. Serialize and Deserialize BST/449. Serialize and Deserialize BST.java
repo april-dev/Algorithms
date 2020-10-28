@@ -21,6 +21,7 @@ public class Codec {
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
        // String[] s = data.split(",");
+        //if (data==null) return null; is wrong, for the case [], data is not null, its empty.
         if (data.isEmpty()) return null;
         Queue<String> q = new LinkedList<String>(Arrays.asList(data.split(",")));
         return buildTree(q, Integer.MIN_VALUE, Integer.MAX_VALUE);
