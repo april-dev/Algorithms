@@ -1,3 +1,12 @@
+//Greedy
+
+/*
+If we set a camera at the leaf, the camera can cover the leaf and its parent.
+If we set a camera at its parent, the camera can cover the leaf, its parent and its sibling.
+
+We can see that the second plan is always better than the first.
+*/
+
 class Solution {
     int res = 0;
     public int minCameraCover(TreeNode root) {
