@@ -1,3 +1,9 @@
+//the time is O(n), since T(n) = 2T(n/2) + O(1).
+/*
+Time complexity: O(N) since we visit each node exactly once.
+
+Space complexity: O(N) to keep the output, and O(logN) for the recursion stack.
+*/
 class Solution {
     public TreeNode sortedArrayToBST(int[] nums) {
         int n = nums.length;
