@@ -1,4 +1,17 @@
- public boolean isValidBST(TreeNode root) {
+//failed for test case [2147483647]
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return helper(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+    public boolean helper(TreeNode root, int min, int max){
+        if (root==null) return true;
+        if (root.val<=min || root.val>=max) return false;
+        return helper(root.left, min, root.val) && helper(root.right, root.val, max);
+    }
+}
+
+//We can use Object Integer and null pointer to avoid the corner cases (when node has value Integer.MIN_VALUE or Integer.MAX_VALUE ).
+public boolean isValidBST(TreeNode root) {
         return isValidBST(root, null, null);
     }
     
