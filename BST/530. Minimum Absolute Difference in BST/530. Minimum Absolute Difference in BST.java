@@ -76,3 +76,50 @@ public int getMinimumDifference(TreeNode root) {
     }
     
 }
+
+
+//Iterative
+ public int getMinimumDifference(TreeNode root) {
+       Stack<TreeNode> stack = new Stack<>();
+        int res = Integer.MAX_VALUE;
+        int prev = -1;
+        while (root!=null || !stack.isEmpty()){
+            while (root!=null){
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            if (prev!=-1) res = Math.min(res, root.val-prev);
+            prev = root.val;
+            root = root.right;
+        }
+        return res;
+    }
+
+
+//If it is a binary tree instead of BST, then use TreeSet
+//it is the same as recording all node values in a list, sort the values and O(n) pass
+public class Solution {
+    TreeSet<Integer> set = new TreeSet<>();
+    int min = Integer.MAX_VALUE;
+    
+    public int getMinimumDifference(TreeNode root) {
+        if (root == null) return min;
+        
+        if (!set.isEmpty()) {
+            if (set.floor(root.val) != null) {
+                min = Math.min(min, root.val - set.floor(root.val));
+            }
+            if (set.ceiling(root.val) != null) {
+                min = Math.min(min, set.ceiling(root.val) - root.val);
+            }
+        }
+        
+        set.add(root.val);
+        
+        getMinimumDifference(root.left);
+        getMinimumDifference(root.right);
+        
+        return min;
+    }
+}
