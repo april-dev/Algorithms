@@ -75,12 +75,7 @@ public TreeNode deleteNode(TreeNode root, int key) {
     }
     
     //Solution 4
-    /*
-    As for the case when both children of the node to be deleted are not null, I transplant the successor to replace the node to be deleted, 
-    which is a bit harder to implement than just transplant the left subtree of the node to the left child of its successor. 
-    The former way is used in many text books too. Why? My guess is that transplanting the successor can keep the height of the tree almost unchanged, 
-    while transplanting the whole left subtree could increase the height and thus making the tree more unbalanced
-    */
+   //Iterative way
     private TreeNode deleteRootNode(TreeNode root) {
         if (root == null) {
             return null;
