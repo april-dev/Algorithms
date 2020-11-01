@@ -1,38 +1,40 @@
 //this may not be an O(1)-space solution for cases like 1, 2, 3, 4, 5, 6, 7, 8, ..., n - 1, n, n
 //Solution 2 uses two passes to achieve space O(1). One to find the highest number of occurrences of any value, and then a second pass to collect all values occurring that often
-public class Solution {
-    Integer prev = null;
-    int count = 1;
-    int max = 0;
+class Solution {   
+    int maxCount = 0;
+    int count = 0;
+    TreeNode  prev = null;
+    
     public int[] findMode(TreeNode root) {
-        if (root == null) return new int[0];
+        List<Integer> modes = new ArrayList<>();
+        helper(root, modes);
         
-        List<Integer> list = new ArrayList<>();
-        traverse(root, list);
-        
-        int[] res = new int[list.size()];
-        for (int i = 0; i < list.size(); ++i) res[i] = list.get(i);
+        int[] res = new int[modes.size()];
+        for (int i=0; i<res.length; i++) res[i] = modes.get(i);
         return res;
     }
-    
-    private void traverse(TreeNode root, List<Integer> list) {
-        if (root == null) return;
-        traverse(root.left, list);
-        if (prev != null) {
-            if (root.val == prev)
-                count++;
-            else
-                count = 1;
+    public void helper(TreeNode root, List<Integer> modes){
+        if (root==null) return;
+        helper(root.left, modes);
+        
+        if (prev==null){
+            count = 1;
+        }else{
+            if (prev.val == root.val) count++;
+            else count = 1;
         }
-        if (count > max) {
-            max = count;
-            list.clear();
-            list.add(root.val);
-        } else if (count == max) {
-            list.add(root.val);
+        
+        if (count>maxCount){
+            maxCount = count;
+            modes.clear();
+            modes.add(root.val);
+        }else if (count==maxCount){
+            modes.add(root.val);
         }
-        prev = root.val;
-        traverse(root.right, list);
+            
+        prev = root;
+        
+        helper(root.right, modes);
     }
 }
 
