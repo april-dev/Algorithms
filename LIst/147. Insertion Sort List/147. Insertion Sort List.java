@@ -1,3 +1,27 @@
+//My solution
+public ListNode insertionSortList(ListNode head) {
+        if (head==null) return null;
+        ListNode dummy = new ListNode(0);
+        ListNode cur = dummy;
+        cur.next = head;
+        if (head.next==null) return dummy.next;
+        ListNode nex = head.next;
+        head.next = null;
+        while (nex!=null){
+            ListNode prev = dummy;
+            cur = dummy.next;
+            while (cur!=null && cur.val<nex.val){
+                prev = cur;
+                cur = cur.next;
+            }
+            prev.next = nex;
+            nex = nex.next;
+            prev.next.next = cur;
+        }
+        return dummy.next;
+    }
+
+
 public ListNode insertionSortList(ListNode head) {
         ListNode dummy = new ListNode(Integer.MIN_VALUE);
         ListNode cur = dummy;   
