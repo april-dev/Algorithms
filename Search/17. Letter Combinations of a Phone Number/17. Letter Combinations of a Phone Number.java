@@ -36,3 +36,26 @@ public List<String> letterCombinations(String digits) {
         
         return ans;
     }
+
+
+//DFS
+class Solution {
+    private  static final String[] map = new String[]{"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    
+    public List<String> letterCombinations(String digits) {
+        LinkedList<String> ans = new LinkedList<>();
+        if (digits.length()==0) return ans;
+        helper(digits, 0, "", ans);
+        return ans;
+    }
+    public void helper(String digits, int index, String prefix, LinkedList<String> ans){
+        if (index==digits.length()){
+            ans.add(prefix);
+            return;
+        }
+        String key = map[digits.charAt(index) - '0'];
+        for (int i=0; i<key.length(); i++){
+            helper(digits, index+1, prefix + key.charAt(i), ans);
+        }
+    }  
+}
