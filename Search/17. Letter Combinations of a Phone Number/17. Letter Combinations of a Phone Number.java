@@ -59,3 +59,31 @@ class Solution {
         }
     }  
 }
+
+
+//DFS
+//use StringBuilder
+//faster
+class Solution {
+    private  static final String[] map = new String[]{"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    
+    public List<String> letterCombinations(String digits) {
+        LinkedList<String> ans = new LinkedList<>();
+        if (digits.length()==0) return ans;
+        StringBuilder sb = new StringBuilder();
+        helper(digits, 0, sb, ans);
+        return ans;
+    }
+    public void helper(String digits, int index, StringBuilder sb, LinkedList<String> ans){
+        if (index==digits.length()){
+            ans.add(sb.toString());
+            return;
+        }
+        String key = map[digits.charAt(index) - '0'];
+        for (int i=0; i<key.length(); i++){
+            int len = sb.length();
+            helper(digits, index+1, sb.append(key.charAt(i)), ans);
+            sb.setLength(len);
+        }
+    }   
+}
