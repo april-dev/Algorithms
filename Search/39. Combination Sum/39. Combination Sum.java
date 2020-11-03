@@ -30,6 +30,7 @@ class Solution {
         return ans;
     }
     public void helper(int[] candidates, int target, int index, List<Integer> temp, List<List<Integer>> ans){
+        //With sorting and the target>=candidates[i] condition below, the first if statement is unnecessary
         if (target < 0 ) return;
         if (target==0){
             ans.add(new ArrayList<>(temp));
