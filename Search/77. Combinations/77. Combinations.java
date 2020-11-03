@@ -1,3 +1,4 @@
+//Time Complexity: O(n^min{k,n-k}). See doc
 class Solution {
     public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> ans = new ArrayList<>();
