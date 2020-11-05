@@ -41,3 +41,35 @@ class Solution {
         }
     }
 }
+
+
+//Solution 2: Swap values
+public class Solution {
+public List<List<Integer>> permute(int[] num) {
+ List<List<Integer>> result = new ArrayList<List<Integer>>(); 
+ permute(num,0,result);
+ return result;}
+
+
+ public void permute(int[] num, int begin, List<List<Integer>> result){
+    if(begin>=num.length){
+        List<Integer> list = new ArrayList<Integer>();
+        for(int i=0;i<num.length;i++){
+            list.add(num[i]);
+        }
+        result.add(list);
+        return;
+    }
+    for(int i=begin;i<num.length;i++){
+        swap(begin,i,num);
+        permute(num,begin+1,result);
+        swap(begin,i,num);
+        
+    }
+}
+
+public void swap (int x, int y,int[] num){
+    int temp = num[x];
+    num[x]=num[y];
+    num[y]=temp;
+} }
