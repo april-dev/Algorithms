@@ -1,3 +1,4 @@
+//Time O(2^N)
 class Solution {
     public List<String> generateParenthesis(int n) {
         List<String> res = new ArrayList<>();
