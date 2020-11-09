@@ -1,3 +1,5 @@
+// dfs function is called N times. inside the dfs function, for loop runs 0...M.length (=N). 
+//So, the dfs function viewed by itself is O(N) and the dfs function is called N times, so O(N*N).
 public int findCircleNum(int[][] M) {
         int[] visited = new int[M.length];
         int count = 0;
