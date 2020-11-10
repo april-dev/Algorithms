@@ -1,3 +1,7 @@
+//when you can only go 4 directions, the (minimum) number of cells you travel from point A to point B is the Manhattan distance.
+//BFS 
+//time: O(n*n), We process an individual cell only once (or twice).
+//space: O(n) for the queue.
 int[][] offset = new int[][] {{-1, 0},{1,0},{0,-1},{0,1}};
     public int maxDistance(int[][] grid) {
         Queue<int[]> q = new LinkedList<>();
@@ -30,7 +34,10 @@ int[][] offset = new int[][] {{-1, 0},{1,0},{0,-1},{0,1}};
         return level-1;
     }
     
-//DFS time comsuming
+//DFS 
+//more time comsuming
+//O(m * n * n), where m is the number of land cells.
+// O(n * n) for the recursion.
 class Solution {   
     public int maxDistance(int[][] grid) {
         int N = grid.length;
