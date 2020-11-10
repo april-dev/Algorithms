@@ -30,21 +30,33 @@ int[][] offset = new int[][] {{-1, 0},{1,0},{0,-1},{0,1}};
         return level-1;
     }
     
-    //DFS time comsuming
-    void dfs(vector<vector<int>>& g, int i, int j, int dist = 1) {
-  if (i < 0 || j < 0 || i >= g.size() || j >= g[i].size() || (g[i][j] != 0 && g[i][j] <= dist)) return;
-  g[i][j] = dist;
-  dfs(g, i - 1, j, dist + 1), dfs(g, i + 1, j, dist + 1), dfs(g, i, j - 1, dist + 1), dfs(g, i, j + 1, dist + 1);
-}
-int maxDistance(vector<vector<int>>& g, int mx = -1) {
-  for (auto i = 0; i < g.size(); ++i)
-    for (auto j = 0; j < g[i].size(); ++j)
-      if (g[i][j] == 1) {
-          g[i][j] = 0;
-          dfs(g, i, j);
-      }
-  for (auto i = 0; i < g.size(); ++i)
-    for (auto j = 0; j < g[i].size(); ++j)
-      if (g[i][j] > 1) mx = max(mx, g[i][j] - 1);
-  return mx;
+//DFS time comsuming
+class Solution {   
+    public int maxDistance(int[][] grid) {
+        int N = grid.length;
+        for (int i=0; i<N; i++){
+            for (int j=0; j<N; j++){
+                if (grid[i][j] == 1) {
+                    grid[i][j] = 0;
+                    helper(grid, i, j, 1);
+                }
+            }
+        }
+        int res = 0;
+        for (int i=0; i<N; i++){
+            for (int j=0; j<N; j++){
+                res = Math.max(res, grid[i][j]);
+            }
+        }
+        return res==1?-1:res-1;
+        
+    }
+    public void helper(int[][] grid, int x, int y, int level){
+        if (x<0 || x>=grid.length || y<0 || y>=grid.length || grid[x][y]!=0 && grid[x][y]<=level) return;
+        grid[x][y] = level;
+        helper(grid, x+1, y, level+1);
+        helper(grid, x-1, y, level+1);
+        helper(grid, x, y+1, level+1);
+        helper(grid, x, y-1, level+1);
+    }
 }
