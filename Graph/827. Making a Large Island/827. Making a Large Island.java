@@ -1,3 +1,56 @@
+//My solution
+class Solution {
+    public int largestIsland(int[][] grid) {
+        HashMap<Integer, Integer> area = new HashMap<>();
+        int index = 2, N = grid.length, res = 0;
+        int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        for (int i=0; i<N; i++){
+            for (int j=0; j<N; j++){
+                if (grid[i][j]==1){
+                    area.put(index, dfs(grid, i, j, index));
+                    //in case there is no 0 in the  grid, e.g., [[1]].
+                    res = Math.max(res, area.get(index++));
+                }
+            }
+        }
+        for (int i=0; i<N; i++){
+            for (int j=0; j<N; j++){
+                if (grid[i][j]==0){
+                    int size = 1;
+                    HashSet<Integer> visited = new HashSet<>();
+                    for (int[] dir:dirs){
+                        int x = i+dir[0];
+                        int y = j+dir[1];
+                        if (isValid(x, y, N) && grid[x][y]>1 && !visited.contains(grid[x][y])) {
+                            size+=area.get(grid[x][y]);
+                            visited.add(grid[x][y]);
+                        }
+                    }
+                res = Math.max(res, size);    
+                }
+            }
+        }
+        return res;
+    }
+    public int dfs(int[][] grid, int x, int y, int index){
+        if (isValid(x, y, grid.length)==false || grid[x][y]!=1) return 0;
+        grid[x][y] = index;
+        int area = 0;
+        area = dfs(grid, x+1, y, index) +
+            dfs(grid, x-1, y, index) +
+            dfs(grid, x, y+1, index) +
+            dfs(grid, x, y-1, index);
+        return 1+area;
+    }
+    public boolean isValid(int x, int y, int N){
+        return x>=0 && x<N && y>=0 && y<N;
+    }
+}
+
+
+
+
+
 import javafx.util.Pair;
 class Solution {
     public int N = 0;
