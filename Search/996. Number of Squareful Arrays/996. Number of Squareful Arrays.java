@@ -72,3 +72,33 @@ public void dfs(int num, int left){
         }
         cnt.put(num, cnt.get(num)+1);
     }
+
+
+
+//Use Q47. Permutations II
+class Solution {
+    int res = 0;
+    public int numSquarefulPerms(int[] A) { 
+        boolean[] visited = new boolean[A.length];
+        Arrays.sort(A);
+        dfs(A, -1, visited, 0);
+        return res;
+    }
+    public void dfs(int[] A, int last, boolean[] visited, int curCount){  
+        if (curCount==A.length){
+            res++;
+            return;
+        }
+        for (int i=0; i<A.length; i++){
+            if (visited[i]==true || i>0 && A[i]==A[i-1] && visited[i-1]==false) continue;
+            if (last!=-1 && valid(A[last], A[i])==false) continue;
+            visited[i] = true;
+            dfs(A, i, visited, curCount+1);
+            visited[i] = false;
+        }       
+    }
+    public boolean valid(int a, int b){
+        int c = (int) Math.sqrt(a + b);
+        return c*c==a+b;
+    }
+}
