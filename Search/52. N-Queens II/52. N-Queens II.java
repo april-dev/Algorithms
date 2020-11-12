@@ -36,3 +36,33 @@ class Solution {
         return true;
     }
 }
+
+
+
+//faster version
+class Solution {
+    int res = 0;
+    public int totalNQueens(int n) {     
+        boolean[] cols = new boolean[n];
+        boolean[] d1 = new boolean[2*n - 1];
+        boolean[] d2 = new boolean[2*n - 1];
+        dfs(n, 0, cols, d1, d2);
+        return res;
+    }
+    public void dfs(int n, int row,boolean[] cols, boolean[] d1, boolean[] d2){
+        if (row == n){
+            res++;
+            return;
+        }
+        for (int col=0; col<n; col++){
+            int index_d1 = col + row;
+            int index_d2 = col - row + n - 1;
+            
+            if (!cols[col] && !d1[index_d1] && !d2[index_d2]){
+                cols[col] = true; d1[index_d1] = true; d2[index_d2] = true;                
+                dfs(n, row+1, cols, d1, d2);
+                cols[col] = false; d1[index_d1] = false; d2[index_d2] = false;
+            }
+        }
+    }
+}
