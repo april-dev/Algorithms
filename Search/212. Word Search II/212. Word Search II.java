@@ -1,3 +1,7 @@
+/*
+For the naive Trie approach (the one uses startwith and search), I think the time complexity is O(m * n * wl * 4^wl) where m*n is the size of the 
+board and wl is the average length of the words in the list. For this optimized approach, it becomes O(m * n * 4^wl). 
+*/
 class Solution {
     public List<String> findWords(char[][] board, String[] words) {
         List<String> res = new ArrayList<>();
