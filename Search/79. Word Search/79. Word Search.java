@@ -3,6 +3,10 @@ The binary value for 256 is 100000000. Now we have ascii chars upto 255 numbers 
 Now if you do XOR(^) operation between these ascii chars and 256 it will convert all the range above 256 number. Java has 16 bits for char type. 
 So this is possible. And now none of out string chars will match any of these masked chars because one is under 0-255 other is above 256 range.
 */
+
+/*
+space is O(L) where L is the length of the word; and time is O(M * N * 4^L) where M*N is the size of the board and we have 4^L for each cell because of the recursion.
+*/
 class Solution {
     public boolean exist(char[][] board, String word) {
         char[] arr = word.toCharArray();
