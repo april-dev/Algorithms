@@ -32,3 +32,58 @@ public int ladderLength(String beginWord, String endWord, List<String> wordList)
         }
         return 0;
     }
+
+
+//Bidirectional BFS
+/*
+"The idea behind bidirectional search is to run two simultaneous searches—one forward from
+the initial state and the other backward from the goal—hoping that the two searches meet in
+the middle. The motivation is that b^(d/2) + b^(d/2) is much less than b^d. b is branch factor, d is depth. "
+*/
+
+/*
+the intuition is that you are replacing a big search tree in the one-end solution with two smaller trees in the two-end solution. 
+Both solutions have the same TOTAL depth, yet tree width grows exponentially w.r.t. depths, and the two-end solutions results in less nodes being visited.
+*/
+public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        if (!wordList.contains(endWord)) {
+            return 0;
+        }
+        Set<String> dict = new HashSet<>(wordList);
+        Set<String> beginSet = new HashSet<>();
+        Set<String> endSet = new HashSet<>();
+        beginSet.add(beginWord);
+        endSet.add(endWord);
+
+        int step = 1;
+        Set<String> visited = new HashSet<>();
+        while (!beginSet.isEmpty() && !endSet.isEmpty()) {
+            if (beginSet.size() > endSet.size()) {
+                Set<String> set = beginSet;
+                beginSet = endSet;
+                endSet = set;
+            }
+            Set<String> temp = new HashSet<>();
+            for (String word : beginSet) {
+                char[] chs = word.toCharArray();
+                for (int i = 0; i < chs.length; i++) {
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        char old = chs[i];
+                        chs[i] = c;
+                        String target = String.valueOf(chs);
+                        if (endSet.contains(target)) {
+                            return step + 1;
+                        }
+                        if (!visited.contains(target) && dict.contains(target)) {
+                            temp.add(target);
+                            visited.add(target);
+                        }
+                        chs[i] = old;
+                    }
+                }
+            }
+            beginSet = temp;
+            step++;
+        }
+        return 0;
+    }
