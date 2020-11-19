@@ -1,4 +1,14 @@
-//Time O(2^n) for n instructions
+/*
+Time: Naive BFS O(2^n) for n instructions
+
+The BFS is memorizing pairs of speed and positions. So the total time complexity will be the number of such pairs formed before we hit the target.
+Now, How many different positions are possible to reach to target. In worst case we, could have visited every single position in both the directions i.e. from -target to +target 
+so the total no of positions possible are O(target).
+Now, to check total no of speeds possible we could go either 1, 2, 4, 8.. or -1, -2, -4 , -8 .. .. upto (target). because we will always reach the target with speed bounded by 
+target position. So total no of distinct speeds are 2O(log target)
+Hence time complexity= Total distinct positions(=target) * total distinct speeds (=log(target)) = O(targetlog(target)).
+*/
+
 /*
 We should allow the car to be able to pass the target and then reverse the direction to go to the target. However, there should be an upper bound because there's no point to 
 keep accelerating after passing the target.
