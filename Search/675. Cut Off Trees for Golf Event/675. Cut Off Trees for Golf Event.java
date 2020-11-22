@@ -1,3 +1,8 @@
+/*
+The worst case time complexity could be O(m^2 * n^2) (m = number of rows, n = number of columns) since there are m * n trees and for each BFS worst case time complexity 
+is O(m * n) too.
+*/
+
 class Solution {
     int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
     public int cutOffTree(List<List<Integer>> forest) {
