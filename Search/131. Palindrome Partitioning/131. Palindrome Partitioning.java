@@ -1,3 +1,4 @@
+//my solution
 class Solution {
     public List<List<String>> partition(String s) {
         List<List<String>> res = new ArrayList<>();
