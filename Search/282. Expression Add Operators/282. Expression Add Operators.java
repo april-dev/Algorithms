@@ -11,6 +11,7 @@ class Solution {
             return;
         }
         for (int i=pos; i<num.length(); i++){
+            //if (i!=pos && num.charAt(i)=='0') break; is wrong
             if (i!=pos && num.charAt(pos)=='0') break;
             long cur = Long.parseLong(num.substring(pos, i+1));
             if (pos==0) helper(num, target, path + cur, i+1, cur, cur, res);
