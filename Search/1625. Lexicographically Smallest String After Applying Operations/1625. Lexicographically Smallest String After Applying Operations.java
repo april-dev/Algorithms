@@ -25,3 +25,33 @@ public String findLexSmallestString(String s, int a, int b) {
         }
         return smallest;
     }
+
+//DFS
+class Solution {
+    String ans;
+    HashSet<String> visited = new HashSet<>();
+    public String findLexSmallestString(String s, int a, int b) {
+        ans = s;
+        dfs(s, a, b);
+        return ans;
+    }
+    public void dfs(String s, int a, int b){
+        if (visited.contains(s)) return;
+        if (ans.compareTo(s) > 0) ans = s;
+        visited.add(s);
+        dfs(add(s, a), a, b);
+        dfs(rotate(s, b), a, b);        
+    }
+    public String add(String s, int a){
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<s.length(); i++){
+            if (i%2 == 0) sb.append(s.charAt(i));
+            else sb.append((s.charAt(i) - '0' + a)%10);
+        }
+        return sb.toString();
+    }
+    public String rotate(String s, int b){
+        int n = s.length();
+        return s.substring(n - b) + s.substring(0, n - b);
+    }
+}
