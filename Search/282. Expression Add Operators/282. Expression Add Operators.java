@@ -1,3 +1,4 @@
+//There are n-1 slots for us to add an operator and there are 4 choices (+, -, * and no operator) so the complexity is 4^(N-1).
 class Solution {
     public List<String> addOperators(String num, int target) {
         List<String> res = new ArrayList<>();
