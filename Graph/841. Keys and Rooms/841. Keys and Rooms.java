@@ -17,34 +17,24 @@ public boolean canVisitAllRooms(List<List<Integer>> rooms) {
     }
     
     
-    
-      public boolean canVisitAllRooms(List<List<Integer>> rooms) {
-        Stack<Integer> dfs = new Stack<>(); dfs.add(0);
-        HashSet<Integer> seen = new HashSet<Integer>(); seen.add(0);
-        while (!dfs.isEmpty()) {
-            int i = dfs.pop();
-            for (int j : rooms.get(i))
-                if (!seen.contains(j)) {
-                    dfs.add(j);
-                    seen.add(j);
-                    if (rooms.size() == seen.size()) return true;
-                }
+//DFS
+class Solution {
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        boolean[] visited = new boolean[rooms.size()];
+        visited[0] = true;
+        dfs(rooms, 0, visited);
+        int res = 0;
+        for (int i=0; i<visited.length; i++){
+            if (visited[i]==true) res++;
         }
-        return rooms.size() == seen.size();
+        return res==rooms.size()? true:false;
     }
-
-
-HashSet<Integer> enteredRooms = new HashSet<>();
-
-public boolean canVisitAllRooms(List<List<Integer>> rooms) {
-    enterRoom(0, rooms);
-    return enteredRooms.size() == rooms.size();
-}
-
-private void enterRoom(int roomId, List<List<Integer>> rooms) {
-    enteredRooms.add(roomId);
-    List<Integer> keysInRoom = rooms.get(roomId);
-    for (int key: keysInRoom)
-        if (!enteredRooms.contains(key))
-            enterRoom(key, rooms);
+    public void dfs(List<List<Integer>> rooms, int index, boolean[] visited){
+        
+        for (int key: rooms.get(index)){
+            if (visited[key]==true) continue;
+            visited[key] =  true;
+            dfs(rooms, key, visited);
+        }
+    }
 }
