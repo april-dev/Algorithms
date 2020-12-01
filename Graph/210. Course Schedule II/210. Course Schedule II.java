@@ -1,5 +1,5 @@
 // only difference with 207 is line 31. Post order traversal can be used to return topological sort orders. 
-
+//still has to detect cycle
 public int[] findOrder(int numCourses, int[][] prerequisites) {
         List<Integer>[] map = new ArrayList[numCourses];
         for (int i=0; i<numCourses; i++){
