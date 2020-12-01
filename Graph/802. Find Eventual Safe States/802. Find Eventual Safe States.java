@@ -18,7 +18,8 @@ public List<Integer> eventualSafeNodes(int[][] graph) {
             return true;
         }
         
-        //topological sort
+//topological sort
+//Using degree array to record the out-degree, neighbors map to record In-neighbors(for example 0->1, 2->1, map(1) = [0, 2]).
         public List<Integer> eventualSafeNodes(int[][] graph) {
         int N = graph.length;
         int[] degree = new int[N];
