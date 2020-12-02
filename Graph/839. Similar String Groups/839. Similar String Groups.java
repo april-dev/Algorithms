@@ -35,6 +35,44 @@
     }
     
     
+
+
+//Union Find v2
+class Solution {
+    public int numSimilarGroups(String[] strs) {
+        int[] parent = new int[strs.length];
+        for (int i=0; i<parent.length; i++) parent[i] = i;
+        int res = strs.length;
+        for (int i=0; i<strs.length; i++){
+            for (int j=i+1; j<strs.length; j++){
+                if (check(strs[i], strs[j])) {
+                    int p1 = find(parent, i);
+                    int p2 = find(parent, j);
+                    if (p1!=p2) parent[p1] = p2;
+                    if(p1!=p2) res--;
+                }
+            }
+        }       
+        return res;
+    }
+    public int find(int[] parent, int i){
+        if (parent[i]!=i){
+            parent[i] = find(parent, parent[i]);
+        }
+        return parent[i];
+    }
+    public boolean check(String a, String b){
+        int count = 0;
+        for (int i=0; i<a.length(); i++){
+            if (a.charAt(i)!=b.charAt(i)) count++;
+            if (count>2) return false;
+        }
+        return true;
+    }
+}
+
+
+
     
     //DFS (faster)
     public int numSimilarGroups(String[] a) {
