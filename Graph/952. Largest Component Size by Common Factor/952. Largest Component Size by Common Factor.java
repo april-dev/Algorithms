@@ -1,3 +1,42 @@
+//Time: O(N^2)
+//TLE
+class Solution {
+    public int largestComponentSize(int[] A) {
+        int[] parent = new int[A.length];
+        for (int i=0; i<A.length; i++) parent[i] = i;
+        for (int i=0; i<A.length; i++){
+            for (int j=i+1; j<A.length; j++){
+                if (factor(A[i], A[j])){
+                    int p1 = find(parent, i);
+                    int p2 = find(parent, j);
+                    if (p1!=p2) parent[p1] = p2;
+                }
+            }
+        }
+        int res = 0;
+        int[] count = new int[A.length];
+        for (int i=0; i<parent.length; i++){
+            int p = find(parent, i);
+            count[p]++;
+        }
+        for (int i=0; i<A.length; i++) res = Math.max(res, count[i]);
+        return res;
+    }
+    public int find(int[] parent, int i){
+        if (parent[i]!=i){
+            parent[i] = find(parent, parent[i]);
+        }
+        return parent[i];
+    }
+    public boolean factor(int a, int b){
+        for (int i=2; i<=Math.min(a, b); i++){
+            if (a%i==0 && b%i==0) return true;
+        }
+        return false;
+    }
+}
+
+//HashMap
 class Solution {
     class UF {
         int[] parent;
@@ -57,6 +96,8 @@ class Solution {
         return uf.max;
     }
 }
+
+
 
 //Prime Factorization and Union Find
 class Solution {
