@@ -97,6 +97,57 @@ class Solution {
     }
 }
 
+//My solution using HashMap
+class Solution {
+    int max = 0;
+    public int largestComponentSize(int[] A) {
+        int[] parent = new int[A.length];
+        int[] count = new int[A.length];
+        for (int i=0; i<A.length; i++) {
+            parent[i] = i;
+            count[i] = 1;
+        }
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i=0; i<A.length; i++){
+            int a = A[i];
+            for (int j=2; j*j<=a; j++){
+                if (a%j == 0){
+                    if (!map.containsKey(j)) map.put(j, i);
+                    else union(parent, count, i, map.get(j));
+                    
+                    if (!map.containsKey(a/j)) map.put(a/j, i);
+                    else union(parent, count, i, map.get(a/j));
+                }         
+            }
+            if (!map.containsKey(a)) map.put(a, i);
+            else union(parent, count, i, map.get(a));
+        }
+        
+        int res = 0;
+        for (int i=0; i<parent.length; i++){
+            if (parent[i]==i) res = Math.max(res, count[i]);
+        }
+        
+        return res;
+    }
+    public int find(int[] parent, int i){
+        if (parent[i]!=i){
+            parent[i] = find(parent, parent[i]);
+        }
+        return parent[i];
+    }
+    public void union(int[] parent, int[] count, int i, int j){
+        int p1 = find(parent, i);
+        int p2 = find(parent, j);
+        if (p1!=p2){
+            parent[p1] = p2;
+            count[p2] += count[p1];
+            //max = Math.max(max, count[p2]);
+        }
+    }
+}
+
+
 
 
 //Prime Factorization and Union Find
