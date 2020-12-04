@@ -2,7 +2,7 @@
      * Solution 1: Union Find
      *
      * Use two hash map with union find class to solve the problem
-     *  one to one mapping: mail string to its parent index mapping
+     *  one to one mapping: map string to its parent index 
      *  one to many mapping: parent index to all emails that belong to same group mapping
      * */
  class Solution {
