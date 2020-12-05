@@ -34,6 +34,46 @@ class Solution {
 }
 
 
+//bfs
+class Solution {
+    public boolean possibleBipartition(int N, int[][] dislikes) {
+        int[] states = new int[N+1];
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
+        for (int[] dislike: dislikes){
+            int d1 = dislike[0];
+            int d2 = dislike[1];
+            map.putIfAbsent(d1, new ArrayList<>());
+            map.putIfAbsent(d2, new ArrayList<>());
+            map.get(d1).add(d2);
+            map.get(d2).add(d1);
+        }
+        for (int i=1; i<=N; i++){
+            if (states[i]==0){
+                if (bfs(i, 1, states, map)==false) return false;
+            }
+        }
+        return true;
+    }
+    public boolean bfs(int node, int state, int[] states, HashMap<Integer, List<Integer>> map){
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(node);
+        states[node] = 1;
+        
+        while (!queue.isEmpty()){
+            int cur = queue.poll();
+            if (map.containsKey(cur)){
+            for (int child: map.get(cur)){
+                if (states[child]!=0 && states[child] != -states[cur]) return false;
+                if (states[child]!=0 && states[child] == -states[cur]) continue;
+                queue.add(child);
+                states[child] = -states[cur];
+            }
+            }
+        }
+        return true;
+    }
+}
+
 //solution from Leetcode
 public boolean possibleBipartition(int N, int[][] dislikes) {
         boolean[][] g = new boolean[N][N];
