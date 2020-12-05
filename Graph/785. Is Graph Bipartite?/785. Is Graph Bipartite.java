@@ -1,4 +1,31 @@
- public boolean isBipartite(int[][] graph) {
+//My solution
+class Solution {
+    public boolean isBipartite(int[][] graph) {
+        int[] states = new int[graph.length];
+        boolean temp;
+        for (int i=0; i<graph.length; i++){           
+            if (states[i]==0) temp = dfs(graph, i, states, 1);
+         //redundant line because after it enters the dfs function below, it will immediately return true for the second if condition.
+            else temp = dfs(graph, i, states, states[i]);
+            if (temp==false) return false;
+        }
+        return true;
+    }
+    public boolean dfs(int[][] graph, int i, int[] states, int state){
+        if (states[i]!=0 && states[i]!=state) return false;
+        if (states[i]!=0 && states[i]==state) return true;
+        states[i] = state;
+        for (int j=0; j<graph[i].length; j++){
+            if (dfs(graph, graph[i][j], states, state*(-1))==false) return false;
+        }
+        return true;
+    }
+}
+
+
+
+//solution from Leetcode
+public boolean isBipartite(int[][] graph) {
         int n = graph.length;
         int[] colors = new int[n];
         
