@@ -44,7 +44,15 @@ public int findCircleNum(int[][] M) {
         }
         return count;
     }
-    
+     /*
+     public void dfs(int[][] M, boolean[] visited, int i){
+        if (visited[i]==true) return;
+        visited[i] = true;
+        for (int j=0; j<M.length; j++){
+            if (M[i][j]==1) dfs(M, visited, j);
+        }
+    }
+     */
      public void dfs(int[][] M, int[] visited, int i){
         for (int j = 0; j < M.length; j++){
             if (M[i][j] == 1 && visited[j] == 0){
