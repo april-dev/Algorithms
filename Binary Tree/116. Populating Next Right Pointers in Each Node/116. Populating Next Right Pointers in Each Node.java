@@ -25,7 +25,7 @@ public Node connect(Node root) {
 
 
 
-//the code below only works for perfect binary tree, it will not work for case [1,2,3,4,5,null,7], but the code above works for all cases.
+//the code below only works for perfect binary tree, it will not work for case [1,2,3,4,5,null,7], but the code above works for all cases (Q117).
 public Node connect(Node root) {
         if (root==null) return root;
         Node pre = root;
