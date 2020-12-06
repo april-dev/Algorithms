@@ -1,3 +1,31 @@
+//level order traversal
+public Node connect(Node root) {
+                if(root==null)return null;
+                if(root.left==null && root.right==null)return root;
+                Queue<Node> q=new LinkedList<>();
+                q.add(root);
+                q.add(null);
+        
+                while(!q.isEmpty()){
+                    Node temp=q.poll();
+                    if(temp==null){
+                        if(q.isEmpty())break;
+                        q.add(null);
+                    }else{
+                        temp.next=q.peek();
+                        if(temp.left!=null)
+                            q.add(temp.left);
+                        if(temp.right!=null)
+                            q.add(temp.right);
+                    }
+                }
+                
+                return root;
+    }
+
+
+
+//the code below only works for perfect binary tree, it will not work for case [1,2,3,4,5,null,7], but the code above works for all cases.
 public Node connect(Node root) {
         if (root==null) return root;
         Node pre = root;
