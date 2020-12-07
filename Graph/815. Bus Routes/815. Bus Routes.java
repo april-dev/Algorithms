@@ -1,35 +1,33 @@
+//BFS
 public int numBusesToDestination(int[][] routes, int S, int T) {
-       HashSet<Integer> visited = new HashSet<>();
-       Queue<Integer> q = new LinkedList<>();
-       HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
-       int ret = 0; 
+        if (S==T) return 0;
+        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+        HashSet<Integer> visited = new HashSet<>();
+        Queue<Integer> queue = new LinkedList<>();
         
-       if (S==T) return 0; 
-        
-       for(int i = 0; i < routes.length; i++){
-            for(int j = 0; j < routes[i].length; j++){
-                ArrayList<Integer> buses = map.getOrDefault(routes[i][j], new ArrayList<>());
-                buses.add(i);
-                map.put(routes[i][j], buses);                
-            }       
+        for (int i=0; i<routes.length; i++){
+            for (int j=0; j<routes[i].length; j++){
+                map.putIfAbsent(routes[i][j], new ArrayList<>());
+                map.get(routes[i][j]).add(i);
+            }
         }
-                
-       q.offer(S); 
-       while (!q.isEmpty()) {
-           int len = q.size();
-           ret++;
-           for (int i = 0; i < len; i++) {
-               int cur = q.poll();
-               ArrayList<Integer> buses = map.get(cur);
-               for (int bus: buses) {
+        
+        queue.add(S);
+        int level = 1;
+        while (!queue.isEmpty()){
+            int size = queue.size();
+            while (size-->0){
+                int cur = queue.poll();
+                for (int bus:map.get(cur)){
                     if (visited.contains(bus)) continue;
                     visited.add(bus);
-                    for (int j = 0; j < routes[bus].length; j++) {
-                        if (routes[bus][j] == T) return ret;
-                        q.offer(routes[bus][j]);  
-                   }
-               }
-           }
+                    for (int route: routes[bus]){
+                        if (route==T) return level;
+                        queue.add(route);
+                    }
+                }
+            }
+            level++;
         }
         return -1;
     }
