@@ -1,3 +1,36 @@
+//my solution
+public int minMutation(String start, String end, String[] bank) {
+        Queue<String> queue = new LinkedList<>();
+        HashSet<String> visited = new HashSet<>();
+        HashSet<String> map = new HashSet<>();
+        char[] charArr = {'A', 'C', 'G', 'T'};
+        for (String s:bank) map.add(s);
+        queue.offer(start);
+        visited.add(start);
+        
+        int count = 0;
+        while (!queue.isEmpty()){
+            int size = queue.size();
+            while (size-->0){
+                String cur = queue.poll();
+                if (cur.equals(end)) return count;
+                for (int i=0; i<cur.length(); i++){
+                    for (char c:charArr){
+                        if (cur.charAt(i)==c) continue;
+                        String temp = cur.substring(0, i) + c + cur.substring(i+1);
+                        if (visited.add(temp) && map.contains(temp)){
+                            queue.add(temp);
+                        }
+                    }
+                }                
+            }
+            count++;
+        }
+        return -1;
+    }
+
+
+
 public int minMutation(String start, String end, String[] bank) {
         if(start.equals(end)) return 0;
         
