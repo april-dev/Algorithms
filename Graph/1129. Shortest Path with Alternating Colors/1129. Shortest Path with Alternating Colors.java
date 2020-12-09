@@ -8,9 +8,11 @@ class Solution {
        queue.offer(new int[]{0, -1});
        visited.add(0 + "," + 1);
        visited.add(0 + "," + "-1");
+      
        int[] res = new int[n];
        Arrays.fill(res, Integer.MAX_VALUE);
        res[0] = 0;
+      
        int len = 1;
        while(!queue.isEmpty()){
            int size = queue.size();
