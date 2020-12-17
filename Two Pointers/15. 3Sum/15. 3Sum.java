@@ -1,3 +1,4 @@
+//O(N^2)
 public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
         int n = nums.length;
