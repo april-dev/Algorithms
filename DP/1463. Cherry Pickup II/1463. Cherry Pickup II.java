@@ -27,7 +27,8 @@ class Solution {
 
 //bottom up
 //initialize dp to 0 is wrong, consider[[0, 0, 0, 10, 0, 0, 0], [0, 0, 0, 10, 0, 0, 0]], answer should be 0, the middle ones wont be reached.
-
+//Time: O(m * n^2)
+//Space: O(m * n^2)
 public int cherryPickup(int[][] grid) {
         int m = grid.length, n = grid[0].length;
         int[][][] dp = new int[m][n][n];
