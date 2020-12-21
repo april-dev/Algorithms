@@ -1,4 +1,5 @@
 //DP + stack
+//similar to 239. Sliding Window Maximum
 //first attemp: O(N^2), TLE
 
 public int maxResult(int[] nums, int k) {
