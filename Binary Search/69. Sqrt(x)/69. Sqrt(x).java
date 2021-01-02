@@ -1,3 +1,16 @@
+//my solution
+public int mySqrt(int x) {
+        int left = 0, right = x;
+        while (left < right){
+            int mid = left + (right - left)/2 + 1;
+            if (mid > x/mid) right = mid - 1;
+            else left = mid;
+        }
+        return left;
+    }
+
+
+
 public int sqrt(int x) {
     if (x == 0)
         return 0;
