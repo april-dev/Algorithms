@@ -1,3 +1,30 @@
+//my solution
+class Solution {
+    public int minEatingSpeed(int[] piles, int H) {
+        int left = 1;
+        int right = 1000000000;
+        
+        while(left < right){
+            int mid = left + (right - left)/2;
+            if (eat(piles, mid) > H) left = mid+1;
+            else right = mid;
+        }
+        
+        return left;
+    }
+    public int eat(int[] piles, int K){
+        int hour = 0;
+        for (int p:piles){
+            if (p%K==0) hour+= p/K;
+            else hour += (p/K) + 1;
+        }
+        return hour;
+    }
+}
+
+
+
+
 //time complexity: O(NlogM)
 //M is the max value among all piles (upper boundary in the binary search) and N is a number of piles.
 //For every binary search we iterate over all N piles.
