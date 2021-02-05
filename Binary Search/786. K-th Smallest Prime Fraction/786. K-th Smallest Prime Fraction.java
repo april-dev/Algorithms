@@ -32,5 +32,21 @@ public int[] kthSmallestPrimeFraction(int[] arr, int k) {
         }        
     }
 
-
-
+//PriorityQueue
+//O(max(n,k) * logn)
+public int[] kthSmallestPrimeFraction(int[] arr, int k) {    
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->arr[a[0]]*arr[b[1]] - arr[a[1]]*arr[b[0]]);
+        int n = arr.length;
+        
+        for (int i=0; i<n-1; i++) pq.offer(new int[] {i, n-1});
+        for (int i=0; i<k-1; i++){
+            int[] cur = pq.poll();
+            if (cur[1]-1>cur[0]){
+                cur[1]--;
+                pq.offer(cur);
+            }
+        }
+        
+        int[] peek = pq.peek();
+        return new int[]{arr[peek[0]], arr[peek[1]]};               
+    }
