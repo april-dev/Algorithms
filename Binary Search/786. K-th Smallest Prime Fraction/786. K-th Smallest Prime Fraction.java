@@ -8,29 +8,29 @@ This is different from the case when the matrix elements are integers, where at 
 the candidate solution must be equal to the kth smallest element in the matrix.
 */
 
-public int[] kthSmallestPrimeFraction(int[] A, int K) {
-    double l = 0, r = 1;
-    int p = 0, q = 1;
-    
-    for (int n = A.length, cnt = 0; true; cnt = 0, p = 0) {
-        double m = (l + r) / 2;
+public int[] kthSmallestPrimeFraction(int[] arr, int k) {
+        double left = 0, right = 1;
+        int p=0, q=1;
+        int n = arr.length;
         
-        for (int i = 0, j = n - 1; i < n; i++) {
-            while (j >= 0 && A[i] > m * A[n - 1 - j]) j--;
-            cnt += (j + 1);
+        while (true){
+            double m = (left +right)/2;
+            int count = 0;
+            p = 0;
+            for (int i=0, j=n-1; i<n; i++){
+                while (j>=0  && arr[i] > m*arr[n-1-j]) j--;
+                count += (j+1);
             
-            if (j >= 0 && p * A[n - 1 - j] < q * A[i]) {
-                p = A[i];
-                q = A[n - 1 - j];
+                if (j >= 0 && p * arr[n - 1 - j] < q * arr[i]) {
+                    p = arr[i];
+                    q = arr[n - 1 - j];
+                }
             }
-        }
-        
-        if (cnt < K) {
-            l = m;
-        } else if (cnt > K) {
-            r = m;
-        } else {
-            return new int[] {p, q};
-        }
+            if (count < k) left = m;
+            else if (count > k) right = m;
+            else return new int[]{p,q};
+        }        
     }
-}
+
+
+
