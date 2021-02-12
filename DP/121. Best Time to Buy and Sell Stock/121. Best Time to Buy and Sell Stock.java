@@ -22,6 +22,20 @@ class Solution {
     }
 }
 
+//Same as Q53
+ public int maxProfit(int[] prices) {
+        int maxProfit = 0;
+        int cumProfit = 0;
+        for (int i=1; i<prices.length; i++){
+            cumProfit = Math.max(prices[i] - prices[i-1], prices[i] - prices[i-1]+cumProfit);
+            maxProfit = Math.max(maxProfit, cumProfit);
+            
+        }
+        return maxProfit;
+    }
+
+
+
 //Another DP
 public int maxProfit(int[] prices) {
        if (prices.length<2) return 0;
