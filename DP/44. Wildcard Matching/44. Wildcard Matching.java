@@ -8,6 +8,7 @@
         boolean[][] dp = new boolean[m+1][n+1];
         dp[0][0] = true;
         
+  // to get dp[0][j] = true, p must be '*', '**', '***',etc. Once p.charAt(j-1) != '*', all the dp[0][j] afterwards will be false.
         for (int i=1; i<=n; i++){
             if (dp[0][i-1]==true && p.charAt(i-1)=='*')dp[0][i] = true;
         }
