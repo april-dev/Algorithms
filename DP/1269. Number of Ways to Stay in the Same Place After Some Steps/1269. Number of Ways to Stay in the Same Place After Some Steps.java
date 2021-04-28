@@ -1,14 +1,15 @@
 public int numWays(int steps, int arrLen) {
-        int maxPos = Math.min(steps,arrLen);
-        long[][] dp = new long[steps+1][maxPos+1];
-        dp[1][0] = 1;
-        dp[1][1] = 1;
-        for (int i=2; i<=steps; i++){
-            for (int j=0; j<maxPos; j++){   
-                dp[i][j]=(dp[i-1][j]+dp[i-1][j+1]+(j>0?dp[i-1][j-1]:0))%1000000007;
+        int maxPos = Math.min(steps,arrLen);  
+        long[][] dp = new long[steps+1][maxPos+1];  //dp[i][j]代表第i步后，位置在j，有多少种走法
+        dp[0][0]=1; 
+        for(int i = 1; i <= steps; i++) { 
+            for(int j = 0; j < maxPos; j++) {
+              //第i步的情况由第i-1步情况得到，三种情况：静止在原地 + 从j+1往回跳一步的情况 + 从j-1向前跳一步的情况
+                dp[i][j] = (dp[i-1][j] + dp[i-1][j+1] + (j>0?dp[i-1][j-1]:0))%1000000007;
             }
         }
-        return (int)dp[steps][0];
+        
+        return (int)dp[steps][0];        
     }
     
 /*
