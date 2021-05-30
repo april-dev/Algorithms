@@ -17,3 +17,21 @@ public int widthOfBinaryTree(TreeNode root) {
         }
         return res;     
     }
+
+
+class Solution {
+    int max = 0;
+    public int widthOfBinaryTree(TreeNode root) {
+        if (root==null) return 0;
+        List<Integer> leftMost = new ArrayList<>();
+        helper(root, 0, 1, leftMost);
+        return max;
+    }
+    public void helper(TreeNode root, int level, int index, List<Integer> leftMost){
+        if (root==null) return;
+        if (level==leftMost.size()) leftMost.add(index);
+        max = Math.max(max, index-leftMost.get(level)+1);
+        helper(root.left, level+1, 2*index, leftMost);
+        helper(root.right, level+1, 2*index+1, leftMost);
+    }
+}
