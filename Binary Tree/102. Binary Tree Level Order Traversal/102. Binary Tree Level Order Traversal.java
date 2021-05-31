@@ -28,7 +28,7 @@ public List<List<Integer>> levelOrder(TreeNode root) {
     }
     public void helper(TreeNode root, List<List<Integer>> res, int level){
         if (root==null) return;
-        if (level>=res.size()) res.add(new ArrayList<>());
+        if (level==res.size()) res.add(new ArrayList<>());
         res.get(level).add(root.val);
         helper(root.left, res, level+1);
         helper(root.right, res, level+1);
