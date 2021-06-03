@@ -21,6 +21,7 @@ public Node connect(Node root) {
 
 //constant space
 //O(1)
+//two while loops
 public Node connect(Node root) {
         if (root==null) return null;
         Node cur = root;
@@ -43,4 +44,30 @@ public Node connect(Node root) {
             dummy.next = null;
         }
         return root;
+    }
+
+//one while loop
+public void connect(TreeLinkNode root) {
+        if (root == null) return;
+        TreeLinkNode curP = root;
+        TreeLinkNode nextDummyHead = new TreeLinkNode(0);
+        TreeLinkNode p = nextDummyHead;
+        while (curP != null) {
+            if (curP.left != null) {
+                p.next = curP.left;
+                p = p.next;
+            }
+            if (curP.right != null) {
+                p.next = curP.right;
+                p = p.next;
+            }
+            if (curP.next != null) {
+                curP = curP.next;
+            }
+            else {
+                curP = nextDummyHead.next;
+                nextDummyHead.next = null;
+                p = nextDummyHead;
+            }
+        }
     }
