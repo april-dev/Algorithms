@@ -1,3 +1,31 @@
+//O(N^2*k) solution
+class Solution {
+    public int maxProfit(int k, int[] prices) {
+        int n = prices.length;
+        if (n==0) return 0;
+        int[][] dp = new int[k+1][n];
+        for (int i=1; i<=k; i++){
+            for (int j=1; j<n; j++){
+                dp[i][j] = dp[i][j-1];
+                int profit = 0;
+                for (int t=0; t<j; t++){                    
+                    profit = Math.max(profit, prices[j]-prices[t] + ((t-1)<0?0:dp[i-1][t-1]));
+                }
+                dp[i][j] = Math.max(dp[i][j], profit);
+            }
+        }
+        return dp[k][n-1];          
+    }
+}
+
+
+
+
+
+
+
+
+
 
 /**
  * dp[i, j] represents the max profit up until prices[j] using at most i transactions. 
