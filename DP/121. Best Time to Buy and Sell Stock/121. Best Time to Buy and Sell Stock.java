@@ -1,4 +1,41 @@
- //transform to Q53 max Subarray
+//Use DP
+//generalization Q188.Best Time to Buy and Sell Stock IV
+public int maxProfit(int[] prices) {
+        int n = prices.length;
+        if (n==1) return 0;
+        int tempMin = prices[0];
+        int[] dp = new int[n];
+        for (int i=1; i<n; i++){
+            dp[i]= Math.max(dp[i-1], prices[i]-tempMin);
+            tempMin = Math.min(tempMin, prices[i]);
+        }
+        return dp[n-1];
+    }
+
+//to further simplify, dont need an array, just need a variable
+public int maxProfit(int[] prices) {
+        int n = prices.length;
+        if (n==1) return 0;
+        int tempMin = prices[0];
+        int result = 0;
+        for (int i=1; i<n; i++){
+            result= Math.max(result, prices[i]-tempMin);
+            tempMin = Math.min(tempMin, prices[i]);
+        }
+        return result;
+    }
+
+
+
+
+
+
+
+
+
+
+
+//transform to Q53 max Subarray
 //Only difference is Q53 can have negative result, but in this question , it is bounded below by 0.
 class Solution {
    public int maxProfit(int[] prices) {
