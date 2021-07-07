@@ -1,3 +1,26 @@
+public int maxProfit(int[] prices) {
+        int n = prices.length;
+        int[][] dp = new int[3][n];
+        
+        for (int k=1; k<=2; k++){
+            int tempMax = -prices[0];
+            for (int j=1; j<n; j++){
+                tempMax = Math.max(tempMax, dp[k-1][j-1] - prices[j]);
+                dp[k][j] = Math.max(dp[k][j-1], prices[j] + tempMax);
+                
+            }
+        }
+        return dp[2][n-1];
+    }
+
+
+
+
+
+
+
+
+
 //see discussion
 //https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/discuss/135704/Detail-explanation-of-DP-solution
  public int maxProfit(int[] prices) {
