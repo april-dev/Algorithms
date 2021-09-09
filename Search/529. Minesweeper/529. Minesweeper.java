@@ -33,3 +33,40 @@ public char[][] updateBoard(char[][] board, int[] click) {
         }
         return board;
     }
+
+
+//DFS
+class Solution {
+    int[][] dirs = {{1,-1}, {1,1}, {-1,1}, {-1,-1}, {1,0}, {-1,0}, {0,1}, {0,-1}};
+    public char[][] updateBoard(char[][] board, int[] click) {        
+        Queue<int[]> q = new LinkedList<>();
+        int m = board.length, n = board[0].length;
+        if (board[click[0]][click[1]]=='M') {
+            board[click[0]][click[1]] = 'X';
+            return board;
+        }
+        dfs(board, click[0], click[1]);
+        return board;
+    }
+    public void dfs(char[][] board, int x, int y){
+        int count = 0;
+    
+        for (int[] dir: dirs){
+            int r = x + dir[0];
+            int c = y + dir[1];
+            if (r<0 || r>=board.length || c<0 || c>=board[0].length) continue;
+            if (board[r][c]=='M') count++;
+        }
+        
+        if (count!=0) board[x][y] = (char) (count + '0');
+        else{
+            board[x][y] = 'B';
+            for (int[] dir: dirs){
+                int r = x + dir[0];
+                int c = y + dir[1];
+                if (r<0 || r>=board.length || c<0 || c>=board[0].length) continue;
+                if (board[r][c]=='E') dfs(board, r,c);
+            }
+        }
+    }
+}
