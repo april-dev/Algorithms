@@ -14,3 +14,23 @@ public int maximalSquare(char[][] matrix) {
         }
         return res*res;
     }
+
+
+//O(1) space
+public int maximalSquare(char[][] matrix) {
+        int res = 0;
+        int m = matrix.length;
+        int n = matrix[0].length;
+        for (int i=0; i<m; i++){
+            for (int j=0; j<n; j++){
+                if (matrix[i][j]=='1' && i!=0 && j!=0){
+                    int ans = Math.min(matrix[i-1][j]-'0', Math.min(matrix[i][j-1]-'0', matrix[i-1][j-1]-'0'))+1;
+                    res = Math.max(res, ans);
+                    matrix[i][j] = (char)(ans+'0');
+                }else{
+                    res = Math.max(res, matrix[i][j]-'0');
+                }
+            }
+        }
+        return res*res;
+    }
